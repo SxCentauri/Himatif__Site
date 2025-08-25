@@ -40,39 +40,71 @@
   </div>
 </section>
   
-      <!-- About Section -->
-      <section id="about" class="py-40 bg-gray-900">
-  <div class="container mx-auto px-6 md:px-12 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-white mb-12" data-aos="fade-up">
-      About HIMATIF
-    </h2>
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      
-      <!-- Gambar -->
-      <div data-aos="fade-right">
-        <img src="./img/Hero.png" alt="About HIMATIF" 
-             class="w-3/4 md:w-full max-w-xl rounded-xl shadow-lg mx-auto"/>
-      </div>
+<section id="about" class="relative py-28 bg-gradient-to-b from-gray-900 to-gray-950 overflow-hidden">
+      <div class="container mx-auto px-6 md:px-12 text-center relative z-10">
+        <!-- Badge -->
+        <span class="enhanced-badge px-6 py-3 rounded-full text-sm text-blue-400 border border-blue-500/30 bg-blue-500/10" data-aos="fade-down">
+          About HIMATIF
+        </span>
 
-      <!-- Teks -->
-      <div data-aos="fade-left" class="text-left">
-        <p class="text-gray-300 leading-relaxed text-lg mb-4">
-          HIMATIF UNIB adalah organisasi mahasiswa yang berfokus pada pengembangan akademik, peningkatan softskill, serta memperkuat solidaritas antar mahasiswa Teknik Informatika Universitas Bengkulu.
-        </p>
-        <p class="text-gray-300 leading-relaxed text-lg mb-4">
-          Sebagai wadah resmi bagi seluruh mahasiswa, HIMATIF hadir untuk mendukung proses belajar di dalam maupun di luar kelas, memfasilitasi kreativitas melalui berbagai program kerja, serta mendorong inovasi di bidang teknologi dan informasi.
-        </p>
-        <p class="text-gray-300 leading-relaxed text-lg mb-4">
-          Kami berkomitmen untuk menciptakan lingkungan yang inklusif, kolaboratif, dan inspiratif, sehingga setiap anggota dapat mengembangkan potensi terbaiknya. 
-        </p>
-        <p class="text-gray-300 leading-relaxed text-lg">
-          Selain itu, HIMATIF juga menjadi jembatan dalam membangun relasi yang erat antar mahasiswa, alumni, hingga dunia industri, dengan harapan mampu melahirkan generasi informatika yang unggul, berdaya saing, dan siap menghadapi tantangan global.
-        </p>
-      </div>
+        <!-- Title -->
+        <h2 class="section-title text-4xl md:text-5xl font-bold text-white mt-6 mb-8" data-aos="fade-up">
+          About HIMATIF
+        </h2>
 
-    </div>
-  </div>
-</section>
+        <!-- Desc -->
+        <p class="text-gray-300 max-w-3xl mx-auto leading-relaxed mb-16 text-lg" data-aos="fade-up" data-aos-delay="200">
+          Himpunan Mahasiswa Informatika adalah sebuah Organisasi Kemahasiswaan khusus Jurusan Teknik Informatika 
+          yang bergerak dalam bidang Akademik maupun Non-Akademik yang dapat menjadi wadah bagi para Mahasiswa 
+          Jurusan Teknik Informatika.
+        </p>
+
+        <!-- Info Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+          <div class="info-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="text-blue-400 text-4xl mb-6">📅</div>
+            <h3 class="text-xl font-bold text-white mb-3">Est. 2008</h3>
+            <p class="text-gray-400 text-sm">15+ years of excellence in nurturing tech talents</p>
+          </div>
+          <div class="info-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="text-blue-400 text-4xl mb-6">🏛</div>
+            <h3 class="text-xl font-bold text-white mb-3">7 Departments</h3>
+            <p class="text-gray-400 text-sm">Specialized divisions for comprehensive development</p>
+          </div>
+          <div class="info-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="text-blue-400 text-4xl mb-6">👥</div>
+            <h3 class="text-xl font-bold text-white mb-3">11 Divisions</h3>
+            <p class="text-gray-400 text-sm">Focused teams for targeted skill development</p>
+          </div>
+          <div class="info-card" data-aos="zoom-in" data-aos-delay="400">
+            <div class="text-blue-400 text-4xl mb-6">✨</div>
+            <h3 class="text-xl font-bold text-white mb-3">20+ Programs</h3>
+            <p class="text-gray-400 text-sm">Diverse range of activities and initiatives</p>
+          </div>
+        </div>
+
+        <!-- Mission & Vision -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div class="mission-vision-card" data-aos="fade-right">
+            <h3 class="text-2xl font-bold text-blue-400 mb-4">Our Mission</h3>
+            <p class="text-gray-300 text-lg">
+              Menjadi wadah pengembangan potensi mahasiswa Teknik Informatika yang berkualitas, inovatif, dan berdaya saing global melalui kegiatan akademik dan non-akademik yang terstruktur dan berkelanjutan.
+            </p>
+          </div>
+          <div class="mission-vision-card" data-aos="fade-left">
+            <h3 class="text-2xl font-bold text-blue-400 mb-4">Our Vision</h3>
+            <p class="text-gray-300 text-lg">
+              Membangun generasi teknologi yang unggul, berkarakter, dan berkontribusi positif bagi perkembangan teknologi informasi di Indonesia melalui berbagai program dan kegiatan yang bermanfaat.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="floating-orb-1"></div>
+  <div class="floating-orb-2"></div>
+  <div class="floating-orb-3"></div>
+    </section>
+
+
 
 <section id="testimonials" class="py-20 bg-gradient-to-b from-gray-900 to-blue-950 relative overflow-hidden">
   <!-- Floating Background Elements -->
@@ -102,8 +134,8 @@
     <div class="swiper mySwiper" data-aos="zoom-in" data-aos-delay="300">
       <div class="swiper-wrapper">
         <!-- Testimoni 1 -->
-        <div class="swiper-slide">
-          <div class="testimonial-card bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[510px] backdrop-blur-sm border border-gray-700/50">
+        <div class="swiper-slide ">
+          <div class="testimonial-card mt-8 bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[480px] max-w-[320px] mx-auto z-0 backdrop-blur-sm border border-gray-700/50">
             <div class="quote-icon mb-4">
               <svg class="w-8 h-8 text-blue-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
@@ -130,7 +162,7 @@
 
         <!-- Testimoni 2 -->
         <div class="swiper-slide">
-          <div class="testimonial-card bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[510px] backdrop-blur-sm border border-gray-700/50">
+          <div class="testimonial-card mt-8 bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[480px] max-w-[320px] mx-auto z-0 backdrop-blur-sm border border-gray-700/50">
             <div class="quote-icon mb-4">
               <svg class="w-8 h-8 text-blue-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
@@ -156,7 +188,7 @@
 
         <!-- Testimoni 3 -->
         <div class="swiper-slide">
-          <div class="testimonial-card bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[510px] backdrop-blur-sm border border-gray-700/50">
+          <div class="testimonial-card mt-8 bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[480px] max-w-[320px] mx-auto z-0 backdrop-blur-sm border border-gray-700/50">
             <div class="quote-icon mb-4">
               <svg class="w-8 h-8 text-blue-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
@@ -182,7 +214,7 @@
 
         <!-- Testimoni 4 -->
         <div class="swiper-slide">
-          <div class="testimonial-card bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[510px] backdrop-blur-sm border border-gray-700/50">
+          <div class="testimonial-card mt-8 bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[480px] max-w-[320px] mx-auto z-0 backdrop-blur-sm border border-gray-700/50">
             <div class="quote-icon mb-4">
               <svg class="w-8 h-8 text-blue-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
@@ -208,7 +240,7 @@
 
         <!-- Testimoni 5 -->
         <div class="swiper-slide">
-          <div class="testimonial-card bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[510px] backdrop-blur-sm border border-gray-700/50">
+          <div class="testimonial-card mt-8 bg-gray-800/80 p-8 rounded-2xl shadow-lg h-full flex flex-col justify-between min-h-[480px] max-w-[320px] mx-auto z-0 backdrop-blur-sm border border-gray-700/50">
             <div class="quote-icon mb-4">
               <svg class="w-8 h-8 text-blue-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
@@ -307,180 +339,330 @@
   </script>
   
   <style>
-  /* Testimonial Card Hover Effects */
+/* Testimonial Card Hover Effects */
+.testimonial-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  max-width: 400px;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.6s;
+}
+
+.testimonial-card:hover::before {
+  left: 100%;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.05) translateY(-8px);
+  box-shadow: 
+    0 25px 50px -12px rgba(59, 130, 246, 0.25),
+    0 0 0 1px rgba(59, 130, 246, 0.2);
+  background: linear-gradient(135deg, 
+    rgba(31, 41, 55, 0.95) 0%, 
+    rgba(30, 58, 138, 0.1) 100%);
+}
+
+.testimonial-card:hover .quote-text {
+  color: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+.testimonial-card:hover .profile-img {
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.5);
+  border-color: #60a5fa;
+}
+
+.testimonial-card:hover .profile-name {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+.testimonial-card:hover .profile-position {
+  color: #93c5fd;
+}
+
+.testimonial-card:hover .quote-icon svg {
+  color: #60a5fa;
+  transform: scale(1.1);
+}
+
+/* Smooth Transitions */
+.quote-text,
+.profile-img,
+.profile-name,
+.profile-position,
+.quote-icon svg {
+  transition: all 0.3s ease;
+}
+
+/* Enhanced Badge */
+.badge,
+.enhanced-badge {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.2), 
+    rgba(29, 78, 216, 0.3));
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge::before,
+.enhanced-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.badge:hover,
+.enhanced-badge:hover {
+  transform: scale(1.1) translateY(-2px);
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+}
+
+.badge:hover::before,
+.enhanced-badge:hover::before {
+  left: 100%;
+}
+
+/* Info Cards */
+.info-card {
+  background: rgba(31, 41, 55, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+.info-card:hover::before {
+  left: 100%;
+}
+
+.info-card:hover {
+  transform: scale(1.15) translateY(-15px) rotateY(5deg);
+  box-shadow: 
+    0 30px 60px -10px rgba(59, 130, 246, 0.4),
+    0 0 0 1px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(31, 41, 55, 0.95) 0%, 
+    rgba(30, 58, 138, 0.2) 100%);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* Mission & Vision Cards */
+.mission-vision-card {
+  background: rgba(31, 41, 55, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.mission-vision-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 1s;
+}
+
+.mission-vision-card:hover::before {
+  left: 100%;
+}
+
+.mission-vision-card:hover {
+  transform: scale(1.08) translateY(-12px) perspective(1000px) rotateX(5deg);
+  box-shadow: 
+    0 35px 70px -15px rgba(59, 130, 246, 0.4),
+    0 0 0 1px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(31, 41, 55, 0.9) 0%, 
+    rgba(30, 58, 138, 0.15) 100%);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.mission-vision-card:hover h3 {
+  color: #60a5fa;
+  text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
+  transform: translateY(-3px);
+}
+
+.mission-vision-card:hover p {
+  color: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+/* Section Title */
+.section-title {
+  background: linear-gradient(135deg, #ffffff, #93c5fd, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+/* Floating Orbs */
+.floating-orb-1,
+.floating-orb-2,
+.floating-orb-3 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  pointer-events: none;
+  filter: blur(40px);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.floating-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  top: 5%;
+  left: -10%;
+  animation: float1 12s ease-in-out infinite, enhanced-pulse 4s ease-in-out infinite;
+}
+
+.floating-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #6366f1, #3730a3);
+  bottom: -10%;
+  right: -5%;
+  animation: float2 15s ease-in-out infinite reverse, enhanced-pulse 4s ease-in-out infinite;
+}
+
+.floating-orb-3 {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+  top: 40%;
+  right: 10%;
+  animation: float3 18s ease-in-out infinite, enhanced-pulse 4s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+  25% { transform: translateY(-30px) translateX(20px) rotate(90deg) scale(1.1); }
+  50% { transform: translateY(-15px) translateX(-15px) rotate(180deg) scale(0.9); }
+  75% { transform: translateY(-40px) translateX(10px) rotate(270deg) scale(1.05); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+  33% { transform: translateY(-25px) translateX(-25px) rotate(120deg) scale(1.08); }
+  66% { transform: translateY(-35px) translateX(15px) rotate(240deg) scale(0.95); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+  20% { transform: translateY(-20px) translateX(-10px) rotate(72deg) scale(1.12); }
+  40% { transform: translateY(-35px) translateX(20px) rotate(144deg) scale(0.88); }
+  60% { transform: translateY(-25px) translateX(-20px) rotate(216deg) scale(1.06); }
+  80% { transform: translateY(-40px) translateX(10px) rotate(288deg) scale(0.92); }
+}
+
+@keyframes enhanced-pulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
+}
+
+/* Swiper Pagination */
+.swiper-pagination-bullet {
+  background: rgba(59, 130, 246, 0.4);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: #3b82f6;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.swiper-pagination-bullet:hover {
+  background: #60a5fa;
+  transform: scale(1.1);
+}
+
+/* Global Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Swiper Container Spacing */
+.mySwiper {
+  padding-bottom: 3rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
   .testimonial-card {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .testimonial-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-    transition: left 0.6s;
-  }
-  
-  .testimonial-card:hover::before {
-    left: 100%;
+    min-height: 450px;
+    padding: 1.5rem;
   }
   
   .testimonial-card:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+  
+  .info-card:hover,
+  .mission-vision-card:hover {
     transform: scale(1.05) translateY(-8px);
-    box-shadow: 
-      0 25px 50px -12px rgba(59, 130, 246, 0.25),
-      0 0 0 1px rgba(59, 130, 246, 0.2);
-    background: linear-gradient(135deg, 
-      rgba(31, 41, 55, 0.95) 0%, 
-      rgba(30, 58, 138, 0.1) 100%);
   }
   
-  .testimonial-card:hover .quote-text {
-    color: #f3f4f6;
-    transform: translateY(-2px);
-  }
-  
-  .testimonial-card:hover .profile-img {
-    transform: scale(1.15);
-    box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.5);
-    border-color: #60a5fa;
-  }
-  
-  .testimonial-card:hover .profile-name {
-    color: #60a5fa;
-    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
-  }
-  
-  .testimonial-card:hover .profile-position {
-    color: #93c5fd;
-  }
-  
-  .testimonial-card:hover .quote-icon svg {
-    color: #60a5fa;
-    transform: scale(1.1);
-  }
-  
-  /* Smooth Transitions */
-  .quote-text,
-  .profile-img,
-  .profile-name,
-  .profile-position,
-  .quote-icon svg {
-    transition: all 0.3s ease;
-  }
-  
-  /* Floating Background Elements */
   .floating-orb-1,
-  .floating-orb-2 {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.1;
-    pointer-events: none;
+  .floating-orb-2,
+  .floating-orb-3 {
+    opacity: 0.08;
+    filter: blur(30px);
   }
   
-  .floating-orb-1 {
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    top: 10%;
-    left: 5%;
-    animation: float1 8s ease-in-out infinite;
+  .info-card,
+  .mission-vision-card {
+    padding: 1.5rem;
   }
-  
-  .floating-orb-2 {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, #6366f1, #3730a3);
-    bottom: 10%;
-    right: 8%;
-    animation: float2 10s ease-in-out infinite reverse;
-  }
-  
-  @keyframes float1 {
-    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-    25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
-    50% { transform: translateY(-10px) translateX(-10px) rotate(180deg); }
-    75% { transform: translateY(-25px) translateX(5px) rotate(270deg); }
-  }
-  
-  @keyframes float2 {
-    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-    33% { transform: translateY(-15px) translateX(-15px) rotate(120deg); }
-    66% { transform: translateY(-25px) translateX(10px) rotate(240deg); }
-  }
-  
-  /* Enhanced Badge */
-  .badge {
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.2), 
-      rgba(29, 78, 216, 0.3));
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-  
-  .badge:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.3), 
-      rgba(29, 78, 216, 0.4));
-  }
-  
-  /* Enhanced Title */
-  .section-title {
-    background: linear-gradient(135deg, #ffffff, #93c5fd, #60a5fa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  /* Swiper Pagination */
-  .swiper-pagination-bullet {
-    background: rgba(59, 130, 246, 0.4);
-    opacity: 1;
-    transition: all 0.3s ease;
-  }
-  
-  .swiper-pagination-bullet-active {
-    background: #3b82f6;
-    transform: scale(1.3);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-  }
-  
-  .swiper-pagination-bullet:hover {
-    background: #60a5fa;
-    transform: scale(1.1);
-  }
-  
-  /* Global Smooth Scroll */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Swiper Container Spacing */
-  .mySwiper {
-    padding-bottom: 3rem;
-  }
-  
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .testimonial-card {
-      min-height: 450px;
-      padding: 1.5rem;
-    }
-    
-    .testimonial-card:hover {
-      transform: scale(1.02) translateY(-4px);
-    }
-    
-    .floating-orb-1,
-    .floating-orb-2 {
-      opacity: 0.05;
-    }
-  }
-  </style>
-  
+}
+</style>
