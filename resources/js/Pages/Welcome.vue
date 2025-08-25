@@ -102,7 +102,7 @@
       <div class="floating-orb-1"></div>
   <div class="floating-orb-2"></div>
   <div class="floating-orb-3"></div>
-    </section>
+</section>
 
 
 
