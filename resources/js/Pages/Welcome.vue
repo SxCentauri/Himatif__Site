@@ -271,26 +271,198 @@
   </div>
 </section>
   
-      <!-- FAQ Section -->
-      <section id="faq" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6 md:px-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12" data-aos="fade-up">Frequently Asked Questions</h2>
-          <div class="space-y-6 max-w-3xl mx-auto">
-            <div class="bg-gray-800 p-6 rounded-xl shadow-md" data-aos="fade-up">
-              <h3 class="font-semibold text-blue-400">Apa itu HIMATIF UNIB?</h3>
-              <p class="text-gray-300 mt-2">Himpunan Mahasiswa Teknik Informatika Universitas Bengkulu.</p>
+<section id="faq" class="relative py-28 bg-gradient-to-b from-gray-900 to-gray-950 overflow-hidden">
+  <!-- Floating Background Elements -->
+  <div class="absolute inset-0">
+    <div class="floating-orb-1"></div>
+    <div class="floating-orb-2"></div>
+  </div>
+
+  <div class="container mx-auto px-6 md:px-12 relative z-10">
+    <!-- Badge -->
+    <span class="enhanced-badge px-6 py-3 rounded-full text-sm text-blue-400 border border-blue-500/30 bg-blue-500/10 block w-fit mx-auto" data-aos="fade-down">
+      FAQ
+    </span>
+
+    <!-- Title -->
+    <h2 class="section-title text-4xl md:text-5xl font-bold text-white mt-6 mb-8 text-center" data-aos="fade-up">
+      Frequently Asked Questions
+    </h2>
+
+    <!-- FAQ Container -->
+    <div class="faq-container max-w-4xl mx-auto rounded-2xl p-8 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+      
+      <!-- FAQ Items -->
+      <div class="space-y-4">
+        
+        <!-- FAQ Item 1 -->
+        <div class="faq-item rounded-xl transition-all duration-300 ease-out" 
+             data-aos="fade-up" 
+             data-aos-delay="300">
+          <button class="faq-header w-full flex items-center justify-between p-6 text-left rounded-xl transition-all duration-300">
+            <div class="flex items-center space-x-4">
+              <div class="faq-icon w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg text-white">Apa itu HIMATIF?</h3>
             </div>
-            <div class="bg-gray-800 p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
-              <h3 class="font-semibold text-blue-400">Bagaimana cara bergabung?</h3>
-              <p class="text-gray-300 mt-2">Mahasiswa aktif Teknik Informatika otomatis menjadi anggota HIMATIF.</p>
+            <div class="faq-chevron transition-transform duration-300">
+              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
             </div>
-            <div class="bg-gray-800 p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
-              <h3 class="font-semibold text-blue-400">Apa saja kegiatan HIMATIF?</h3>
-              <p class="text-gray-300 mt-2">Mulai dari kegiatan akademik, pengabdian masyarakat, hingga event besar bidang IT.</p>
+          </button>
+          <div class="faq-content overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0">
+            <div class="px-6 pb-6">
+              <div class="pl-12">
+                <p class="text-gray-300 leading-relaxed">
+                  Himpunan Mahasiswa Teknik Informatika (HIMATIF) adalah organisasi kemahasiswaan tingkat jurusan yang menaungi seluruh mahasiswa Program Studi Teknik Informatika. HIMATIF berfungsi sebagai wadah untuk mengembangkan potensi akademik dan non-akademik mahasiswa serta menjembatani komunikasi antara mahasiswa, dosen, dan pihak eksternal.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item rounded-xl transition-all duration-300 ease-out" 
+             data-aos="fade-up" 
+             data-aos-delay="350">
+          <button class="faq-header w-full flex items-center justify-between p-6 text-left rounded-xl transition-all duration-300">
+            <div class="flex items-center space-x-4">
+              <div class="faq-icon w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-5v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2z"/>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg text-white">Apa saja Program HIMATIF?</h3>
+            </div>
+            <div class="faq-chevron transition-transform duration-300">
+              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0">
+            <div class="px-6 pb-6">
+              <div class="pl-12">
+                <p class="text-gray-300 leading-relaxed mb-3">
+                  HIMATIF menyelenggarakan berbagai program yang mendukung pengembangan mahasiswa:
+                </p>
+                <ul class="text-gray-300 space-y-2 ml-4">
+                  <li>• Workshop dan seminar teknologi terkini</li>
+                  <li>• Kompetisi programming dan hackathon</li>
+                  <li>• Program mentoring untuk mahasiswa baru</li>
+                  <li>• Kegiatan pengabdian masyarakat berbasis teknologi</li>
+                  <li>• Event networking dengan industri IT</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item rounded-xl transition-all duration-300 ease-out" 
+             data-aos="fade-up" 
+             data-aos-delay="400">
+          <button class="faq-header w-full flex items-center justify-between p-6 text-left rounded-xl transition-all duration-300">
+            <div class="flex items-center space-x-4">
+              <div class="faq-icon w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg text-white">Bagaimana cara bergabung dengan HIMATIF?</h3>
+            </div>
+            <div class="faq-chevron transition-transform duration-300">
+              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0">
+            <div class="px-6 pb-6">
+              <div class="pl-12">
+                <p class="text-gray-300 leading-relaxed">
+                  Setiap mahasiswa aktif Program Studi Teknik Informatika secara otomatis menjadi anggota HIMATIF. Untuk terlibat aktif dalam kegiatan organisasi, Anda dapat mengikuti rekrutmen pengurus yang biasanya diadakan setiap tahun atau bergabung dalam berbagai kepanitiaan event yang diselenggarakan HIMATIF.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item rounded-xl transition-all duration-300 ease-out" 
+             data-aos="fade-up" 
+             data-aos-delay="450">
+          <button class="faq-header w-full flex items-center justify-between p-6 text-left rounded-xl transition-all duration-300">
+            <div class="flex items-center space-x-4">
+              <div class="faq-icon w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg text-white">Apa manfaat bergabung dengan HIMATIF?</h3>
+            </div>
+            <div class="faq-chevron transition-transform duration-300">
+              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0">
+            <div class="px-6 pb-6">
+              <div class="pl-12">
+                <p class="text-gray-300 leading-relaxed mb-3">
+                  Bergabung dengan HIMATIF memberikan berbagai manfaat untuk pengembangan diri:
+                </p>
+                <ul class="text-gray-300 space-y-2 ml-4">
+                  <li>• Mengembangkan soft skills dan leadership</li>
+                  <li>• Memperluas jaringan pertemanan dan profesional</li>
+                  <li>• Mendapatkan pengalaman organisasi yang valuable</li>
+                  <li>• Akses ke workshop dan training eksklusif</li>
+                  <li>• Kesempatan magang dan kerja sama dengan industri</li>
+                  <li>• Platform untuk mengasah kemampuan public speaking</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item rounded-xl transition-all duration-300 ease-out" 
+             data-aos="fade-up" 
+             data-aos-delay="500">
+          <button class="faq-header w-full flex items-center justify-between p-6 text-left rounded-xl transition-all duration-300">
+            <div class="flex items-center space-x-4">
+              <div class="faq-icon w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg text-white">Berapa lama masa kepengurusan HIMATIF?</h3>
+            </div>
+            <div class="faq-chevron transition-transform duration-300">
+              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0">
+            <div class="px-6 pb-6">
+              <div class="pl-12">
+                <p class="text-gray-300 leading-relaxed">
+                  Masa kepengurusan HIMATIF berlangsung selama satu tahun akademik. Periode kepengurusan dimulai dari pelantikan pengurus baru hingga pelantikan pengurus periode berikutnya. Selama masa ini, pengurus akan menjalankan program kerja yang telah direncanakan serta mengkoordinasikan berbagai kegiatan untuk kemajuan organisasi dan anggota.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
   
       <!-- Footer -->
       <footer class="bg-blue-950 py-6 text-center text-gray-400">
@@ -300,102 +472,139 @@
   </template>
   
   <script>
-  import "swiper/swiper-bundle.css";
-  import "aos/dist/aos.css";
-  
-  export default {
-    name: "Testimonials",
-    mounted() {
-      // Inisialisasi AOS
-      import("aos").then((AOS) => {
-        AOS.init({
-          duration: 1000,
-          once: true,
-        });
+import "swiper/swiper-bundle.css";
+import "aos/dist/aos.css";
+
+export default {
+  name: "Testimonials",
+  mounted() {
+    // ✅ Inisialisasi AOS
+    import("aos").then((AOS) => {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        easing: "ease-out-quart",
       });
-  
-      // Inisialisasi Swiper
-      import("swiper/bundle").then(({ default: Swiper }) => {
-        new Swiper(".mySwiper", {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          loop: true,
-          autoplay: {
-            delay: 3500,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-          },
-          breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          },
-        });
+    });
+
+    // ✅ Inisialisasi Swiper
+    import("swiper/bundle").then(({ default: Swiper }) => {
+      new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        },
       });
-    },
-  };
-  </script>
+    });
+
+    // ✅ Fungsi FAQ Accordion
+    const faqHeaders = document.querySelectorAll(".faq-header");
+
+    faqHeaders.forEach((header) => {
+      header.addEventListener("click", function () {
+        const faqItem = this.parentElement;
+        const content = this.nextElementSibling;
+        const chevron = this.querySelector(".faq-chevron");
+
+        // Tutup semua FAQ items lainnya
+        document.querySelectorAll(".faq-item").forEach((item) => {
+          if (item !== faqItem) {
+            item.classList.remove("active");
+            item.querySelector(".faq-content").classList.remove("max-h-96", "opacity-100");
+            item.querySelector(".faq-content").classList.add("max-h-0", "opacity-0");
+            item.querySelector(".faq-chevron").classList.remove("rotate-180");
+          }
+        });
+
+        // Toggle FAQ item yang diklik
+        const isActive = faqItem.classList.contains("active");
+
+        if (isActive) {
+          faqItem.classList.remove("active");
+          content.classList.remove("max-h-96", "opacity-100");
+          content.classList.add("max-h-0", "opacity-0");
+          chevron.classList.remove("rotate-180");
+        } else {
+          faqItem.classList.add("active");
+          content.classList.remove("max-h-0", "opacity-0");
+          content.classList.add("max-h-96", "opacity-100");
+          chevron.classList.add("rotate-180");
+        }
+      });
+    });
+  },
+};
+</script>
   
-  <style>
-/* Testimonial Card Hover Effects */
+<style>
+/* CSS yang Anda berikan */
 .testimonial-card {
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-  max-width: 400px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    max-width: 400px;
 }
 
 .testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-  transition: left 0.6s;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.6s;
 }
 
 .testimonial-card:hover::before {
-  left: 100%;
+    left: 100%;
 }
 
 .testimonial-card:hover {
-  transform: scale(1.05) translateY(-8px);
-  box-shadow: 
-    0 25px 50px -12px rgba(59, 130, 246, 0.25),
-    0 0 0 1px rgba(59, 130, 246, 0.2);
-  background: linear-gradient(135deg, 
-    rgba(31, 41, 55, 0.95) 0%, 
-    rgba(30, 58, 138, 0.1) 100%);
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 
+        0 25px 50px -12px rgba(59, 130, 246, 0.25),
+        0 0 0 1px rgba(59, 130, 246, 0.2);
+    background: linear-gradient(135deg, 
+        rgba(31, 41, 55, 0.95) 0%, 
+        rgba(30, 58, 138, 0.1) 100%);
 }
 
 .testimonial-card:hover .quote-text {
-  color: #f3f4f6;
-  transform: translateY(-2px);
+    color: #f3f4f6;
+    transform: translateY(-2px);
 }
 
 .testimonial-card:hover .profile-img {
-  transform: scale(1.15);
-  box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.5);
-  border-color: #60a5fa;
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.5);
+    border-color: #60a5fa;
 }
 
 .testimonial-card:hover .profile-name {
-  color: #60a5fa;
-  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+    color: #60a5fa;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
 }
 
 .testimonial-card:hover .profile-position {
-  color: #93c5fd;
+    color: #93c5fd;
 }
 
 .testimonial-card:hover .quote-icon svg {
-  color: #60a5fa;
-  transform: scale(1.1);
+    color: #60a5fa;
+    transform: scale(1.1);
 }
 
 /* Smooth Transitions */
@@ -404,265 +613,291 @@
 .profile-name,
 .profile-position,
 .quote-icon svg {
-  transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 /* Enhanced Badge */
 .badge,
 .enhanced-badge {
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.2), 
-    rgba(29, 78, 216, 0.3));
-  backdrop-filter: blur(10px);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(59, 130, 246, 0.2), 
+        rgba(29, 78, 216, 0.3));
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
 }
 
 .badge::before,
 .enhanced-badge::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
-  transition: left 0.6s;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+    transition: left 0.6s;
 }
 
 .badge:hover,
 .enhanced-badge:hover {
-  transform: scale(1.1) translateY(-2px);
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(59, 130, 246, 0.6);
-  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+    transform: scale(1.1) translateY(-2px);
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
 }
 
 .badge:hover::before,
 .enhanced-badge:hover::before {
-  left: 100%;
+    left: 100%;
 }
 
 /* Info Cards */
 .info-card {
-  background: rgba(31, 41, 55, 0.8);
-  padding: 2rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(75, 85, 99, 0.5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
+    background: rgba(31, 41, 55, 0.8);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
 }
 
 .info-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-  transition: left 0.8s;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.8s;
 }
 
 .info-card:hover::before {
-  left: 100%;
+    left: 100%;
 }
 
 .info-card:hover {
-  transform: scale(1.15) translateY(-15px) rotateY(5deg);
-  box-shadow: 
-    0 30px 60px -10px rgba(59, 130, 246, 0.4),
-    0 0 0 1px rgba(59, 130, 246, 0.3);
-  background: linear-gradient(135deg, 
-    rgba(31, 41, 55, 0.95) 0%, 
-    rgba(30, 58, 138, 0.2) 100%);
-  border-color: rgba(59, 130, 246, 0.5);
+    transform: scale(1.15) translateY(-15px) rotateY(5deg);
+    box-shadow: 
+        0 30px 60px -10px rgba(59, 130, 246, 0.4),
+        0 0 0 1px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(31, 41, 55, 0.95) 0%, 
+        rgba(30, 58, 138, 0.2) 100%);
+    border-color: rgba(59, 130, 246, 0.5);
 }
 
 /* Mission & Vision Cards */
 .mission-vision-card {
-  background: rgba(31, 41, 55, 0.8);
-  padding: 2rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(75, 85, 99, 0.5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
+    background: rgba(31, 41, 55, 0.8);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
 }
 
 .mission-vision-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-  transition: left 1s;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 1s;
 }
 
 .mission-vision-card:hover::before {
-  left: 100%;
+    left: 100%;
 }
 
 .mission-vision-card:hover {
-  transform: scale(1.08) translateY(-12px) perspective(1000px) rotateX(5deg);
-  box-shadow: 
-    0 35px 70px -15px rgba(59, 130, 246, 0.4),
-    0 0 0 1px rgba(59, 130, 246, 0.3);
-  background: linear-gradient(135deg, 
-    rgba(31, 41, 55, 0.9) 0%, 
-    rgba(30, 58, 138, 0.15) 100%);
-  border-color: rgba(59, 130, 246, 0.5);
+    transform: scale(1.08) translateY(-12px) perspective(1000px) rotateX(5deg);
+    box-shadow: 
+        0 35px 70px -15px rgba(59, 130, 246, 0.4),
+        0 0 0 1px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(31, 41, 55, 0.9) 0%, 
+        rgba(30, 58, 138, 0.15) 100%);
+    border-color: rgba(59, 130, 246, 0.5);
 }
 
 .mission-vision-card:hover h3 {
-  color: #60a5fa;
-  text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
-  transform: translateY(-3px);
+    color: #60a5fa;
+    text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
+    transform: translateY(-3px);
 }
 
 .mission-vision-card:hover p {
-  color: #f3f4f6;
-  transform: translateY(-2px);
+    color: #f3f4f6;
+    transform: translateY(-2px);
 }
 
 /* Section Title */
 .section-title {
-  background: linear-gradient(135deg, #ffffff, #93c5fd, #60a5fa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
+    background: linear-gradient(135deg, #ffffff, #93c5fd, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
 }
 
 /* Floating Orbs */
 .floating-orb-1,
 .floating-orb-2,
 .floating-orb-3 {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.15;
-  pointer-events: none;
-  filter: blur(40px);
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    pointer-events: none;
+    filter: blur(40px);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 .floating-orb-1 {
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  top: 5%;
-  left: -10%;
-  animation: float1 12s ease-in-out infinite, enhanced-pulse 4s ease-in-out infinite;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    top: 5%;
+    left: -10%;
+    animation: float1 12s ease-in-out infinite, enhanced-pulse 4s ease-in-out infinite;
 }
 
 .floating-orb-2 {
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, #6366f1, #3730a3);
-  bottom: -10%;
-  right: -5%;
-  animation: float2 15s ease-in-out infinite reverse, enhanced-pulse 4s ease-in-out infinite;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #6366f1, #3730a3);
+    bottom: -10%;
+    right: -5%;
+    animation: float2 15s ease-in-out infinite reverse, enhanced-pulse 4s ease-in-out infinite;
 }
 
 .floating-orb-3 {
-  width: 250px;
-  height: 250px;
-  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
-  top: 40%;
-  right: 10%;
-  animation: float3 18s ease-in-out infinite, enhanced-pulse 4s ease-in-out infinite;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+    top: 40%;
+    right: 10%;
+    animation: float3 18s ease-in-out infinite, enhanced-pulse 4s ease-in-out infinite;
 }
 
 /* Animations */
 @keyframes float1 {
-  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
-  25% { transform: translateY(-30px) translateX(20px) rotate(90deg) scale(1.1); }
-  50% { transform: translateY(-15px) translateX(-15px) rotate(180deg) scale(0.9); }
-  75% { transform: translateY(-40px) translateX(10px) rotate(270deg) scale(1.05); }
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(-30px) translateX(20px) rotate(90deg) scale(1.1); }
+    50% { transform: translateY(-15px) translateX(-15px) rotate(180deg) scale(0.9); }
+    75% { transform: translateY(-40px) translateX(10px) rotate(270deg) scale(1.05); }
 }
 
 @keyframes float2 {
-  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
-  33% { transform: translateY(-25px) translateX(-25px) rotate(120deg) scale(1.08); }
-  66% { transform: translateY(-35px) translateX(15px) rotate(240deg) scale(0.95); }
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+    33% { transform: translateY(-25px) translateX(-25px) rotate(120deg) scale(1.08); }
+    66% { transform: translateY(-35px) translateX(15px) rotate(240deg) scale(0.95); }
 }
 
 @keyframes float3 {
-  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
-  20% { transform: translateY(-20px) translateX(-10px) rotate(72deg) scale(1.12); }
-  40% { transform: translateY(-35px) translateX(20px) rotate(144deg) scale(0.88); }
-  60% { transform: translateY(-25px) translateX(-20px) rotate(216deg) scale(1.06); }
-  80% { transform: translateY(-40px) translateX(10px) rotate(288deg) scale(0.92); }
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+    20% { transform: translateY(-20px) translateX(-10px) rotate(72deg) scale(1.12); }
+    40% { transform: translateY(-35px) translateX(20px) rotate(144deg) scale(0.88); }
+    60% { transform: translateY(-25px) translateX(-20px) rotate(216deg) scale(1.06); }
+    80% { transform: translateY(-40px) translateX(10px) rotate(288deg) scale(0.92); }
 }
 
 @keyframes enhanced-pulse {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.05); }
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.25; transform: scale(1.05); }
 }
 
 /* Swiper Pagination */
 .swiper-pagination-bullet {
-  background: rgba(59, 130, 246, 0.4);
-  opacity: 1;
-  transition: all 0.3s ease;
+    background: rgba(59, 130, 246, 0.4);
+    opacity: 1;
+    transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-  background: #3b82f6;
-  transform: scale(1.3);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    background: #3b82f6;
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
 .swiper-pagination-bullet:hover {
-  background: #60a5fa;
-  transform: scale(1.1);
+    background: #60a5fa;
+    transform: scale(1.1);
 }
 
 /* Global Smooth Scroll */
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* Swiper Container Spacing */
 .mySwiper {
-  padding-bottom: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* FAQ Styles */
+.faq-container {
+    background: rgba(31, 41, 55, 0.8);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.faq-item {
+    background: rgba(17, 24, 39, 0.6);
+    border: 1px solid rgba(55, 65, 81, 0.5);
+    overflow: hidden;
+}
+
+.faq-header {
+    background: rgba(17, 24, 39, 0.4);
+    transition: all 0.3s ease;
+}
+
+.faq-header:hover {
+    background: rgba(30, 58, 138, 0.2);
+}
+
+.faq-content {
+    transition: all 0.5s ease-out;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .testimonial-card {
-    min-height: 450px;
-    padding: 1.5rem;
-  }
-  
-  .testimonial-card:hover {
-    transform: scale(1.02) translateY(-4px);
-  }
-  
-  .info-card:hover,
-  .mission-vision-card:hover {
-    transform: scale(1.05) translateY(-8px);
-  }
-  
-  .floating-orb-1,
-  .floating-orb-2,
-  .floating-orb-3 {
-    opacity: 0.08;
-    filter: blur(30px);
-  }
-  
-  .info-card,
-  .mission-vision-card {
-    padding: 1.5rem;
-  }
+    .testimonial-card {
+        min-height: 450px;
+        padding: 1.5rem;
+    }
+    
+    .testimonial-card:hover {
+        transform: scale(1.02) translateY(-4px);
+    }
+    
+    .info-card:hover,
+    .mission-vision-card:hover {
+        transform: scale(1.05) translateY(-8px);
+    }
+    
+    .floating-orb-1,
+    .floating-orb-2,
+    .floating-orb-3 {
+        opacity: 0.08;
+        filter: blur(30px);
+    }
+    
+    .info-card,
+    .mission-vision-card {
+        padding: 1.5rem;
+    }
 }
 </style>
