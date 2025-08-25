@@ -9,6 +9,10 @@ Route::get('/', function () {
     return inertia('Welcome'); // ganti Welcome jadi Landing
 });
 
+Route::get('/about', function () {
+    return inertia('About'); // Halaman About
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

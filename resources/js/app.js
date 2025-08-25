@@ -8,6 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import 'aos/dist/aos.css';
 import "swiper/swiper-bundle.css";
 import AOS from 'aos';
+import "@fortawesome/fontawesome-free/css/all.min.css"
 AOS.init();
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

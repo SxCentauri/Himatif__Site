@@ -1,49 +1,295 @@
 <script setup>
+import { Link } from '@inertiajs/vue3'
+import { onMounted, onUnmounted, ref } from 'vue'
+
+// ✅ State untuk mobile menu
+const isMobileMenuOpen = ref(false)
+
+// ✅ Toggle mobile menu
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+// ✅ Handle scroll effect (ubah navbar)
+const handleScroll = () => {
+  const navbar = document.querySelector('.navbar')
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled')
+    } else {
+      navbar.classList.remove('scrolled')
+    }
+  }
+}
+
+// ✅ Close mobile menu ketika klik link
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+}
+
+onMounted(() => {
+  // ---- NAVBAR ----
+  window.addEventListener('scroll', handleScroll)
+  document.documentElement.style.scrollBehavior = 'smooth'
+  document.addEventListener('click', (e) => {
+    const navbar = document.querySelector('.navbar')
+    if (navbar && !navbar.contains(e.target)) {
+      isMobileMenuOpen.value = false
+    }
+  })
+
+  // ---- AOS ----
+  import("aos").then((AOS) => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-quart",
+      offset: 100,
+    });
+  });
+
+  // ---- Swiper ----
+  import("swiper/bundle").then(({ default: Swiper }) => {
+    new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  });
+
+  // ---- FAQ Accordion ----
+  const faqHeaders = document.querySelectorAll(".faq-header");
+  faqHeaders.forEach((header) => {
+    header.addEventListener("click", function () {
+      const faqItem = this.parentElement;
+      const content = this.nextElementSibling;
+      const chevron = this.querySelector(".faq-chevron");
+
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        if (item !== faqItem) {
+          item.classList.remove("active");
+          item.querySelector(".faq-content").classList.remove("max-h-96", "opacity-100");
+          item.querySelector(".faq-content").classList.add("max-h-0", "opacity-0");
+          item.querySelector(".faq-chevron").classList.remove("rotate-180");
+        }
+      });
+
+      const isActive = faqItem.classList.contains("active");
+      if (isActive) {
+        faqItem.classList.remove("active");
+        content.classList.remove("max-h-96", "opacity-100");
+        content.classList.add("max-h-0", "opacity-0");
+        chevron.classList.remove("rotate-180");
+      } else {
+        faqItem.classList.add("active");
+        content.classList.remove("max-h-0", "opacity-0");
+        content.classList.add("max-h-96", "opacity-100");
+        chevron.classList.add("rotate-180");
+      }
+    });
+  });
+
+  // ---- Newsletter Validation ----
+  const newsletterForm = document.querySelector(".newsletter-btn");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("click", function (e) {
+      e.preventDefault();
+      const emailInput = document.querySelector('input[type="email"]');
+      if (emailInput.value === "" || !emailInput.value.includes("@")) {
+        emailInput.focus();
+        emailInput.classList.add("ring-2", "ring-red-500");
+      } else {
+        emailInput.classList.remove("ring-2", "ring-red-500");
+        alert("Terima kasih telah berlangganan newsletter kami!");
+        emailInput.value = "";
+      }
+    });
+  }
+
+  // ---- Background Particle Animation ----
+  function createParticle() {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.width = particle.style.height = Math.random() * 4 + 2 + "px";
+    particle.style.animationDelay = Math.random() * 8 + "s";
+    const bg = document.querySelector(".bg-animated");
+    if (bg) bg.appendChild(particle);
+    setTimeout(() => { particle.remove(); }, 8000);
+  }
+  setInterval(createParticle, 2000);
+
+  // ---- Button Animation ----
+  document.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", function () {
+      this.style.transform = "scale(0.95)";
+      setTimeout(() => { this.style.transform = ""; }, 150);
+    });
+  });
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
   <div class="bg-gray-900 text-gray-100">
     <!-- Navbar -->
-    <header class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-md shadow-md">
-      <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-
+    <header class="navbar fixed w-full z-50 bg-gray-900/80 backdrop-blur-md shadow-md">
+      <nav class="nav-container container mx-auto flex justify-between items-center py-4 px-6">
         <!-- Logo + Text -->
-        <div class="flex items-center space-x-3">
-          <img src="./img/himatif.png" alt="HIMATIF Logo" class="h-10 w-10 object-contain" />
-          <span class="text-2xl font-bold text-blue-400">HIMATIF UNIB</span>
-        </div>
+        <Link href="/" class="logo flex items-center space-x-3">
+        <img src="./img/himatif.png" alt="HIMATIF Logo" class="logo-img h-10 w-10 object-contain" />
+        <span class="logo-text text-2xl font-bold text-blue-400">HIMATIF UNIB</span>
+        </Link>
 
         <!-- Menu -->
-        <ul class="hidden md:flex space-x-8 text-gray-200">
-          <li><a href="#home" class="hover:text-blue-400 transition">Home</a></li>
-          <li><a href="#about" class="hover:text-blue-400 transition">About</a></li>
-          <li><a href="#testimonials" class="hover:text-blue-400 transition">Testimonials</a></li>
-          <li><a href="#faq" class="hover:text-blue-400 transition">FAQ</a></li>
+        <ul class="nav-links hidden md:flex space-x-8 text-gray-200">
+          <li>
+            <Link href="/" class="nav-link hover:text-blue-400 transition">Home</Link>
+          </li>
+          <li>
+            <Link href="/about" class="nav-link hover:text-blue-400 transition">About Us</Link>
+          </li>
+          <li>
+            <Link href="/profile" class="nav-link hover:text-blue-400 transition">Profile</Link>
+          </li>
+          <li>
+            <Link href="/proker" class="nav-link hover:text-blue-400 transition">Proker</Link>
+          </li>
+          <li>
+            <Link href="/academic" class="nav-link hover:text-blue-400 transition">Academic</Link>
+          </li>
+          <li>
+            <Link href="/aspiration" class="nav-link hover:text-blue-400 transition">Aspiration</Link>
+          </li>
         </ul>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
       </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="home"
-      class="min-h-screen flex items-center bg-gradient-to-b from-gray-900 to-blue-950 pt-24 px-6 md:px-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
+    <section id="home" class="min-h-screen flex items-center bg-animated pt-24 px-6 md:px-20 relative overflow-hidden">
+      <!-- Animated Background Particles -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="particle" style="left: 10%; width: 4px; height: 4px; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; width: 6px; height: 6px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; width: 3px; height: 3px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; width: 5px; height: 5px; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; width: 4px; height: 4px; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 60%; width: 6px; height: 6px; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 70%; width: 3px; height: 3px; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 80%; width: 5px; height: 5px; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 90%; width: 4px; height: 4px; animation-delay: 7s;"></div>
+      </div>
 
-        <!-- Left: Text -->
-        <div class="text-center md:text-left" data-aos="fade-right">
-          <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-            Welcome to <span class="text-blue-400">HIMATIF UNIB</span>
+      <!-- Glass Effect Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full relative z-10">
+
+        <!-- Left: Enhanced Text Content -->
+        <div class="text-center lg:text-left space-y-8" data-aos="fade-right" data-aos-duration="1000">
+          <!-- Badge -->
+          <div class="inline-block glass-effect px-6 py-3 rounded-full text-blue-300 text-sm font-medium mb-6">
+            🚀 Teknologi • Inovasi • Komunitas
+          </div>
+
+          <!-- Main Heading -->
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight text-shadow">
+            Welcome to
+            <span class="block gradient-text mt-2">HIMATIF UNIB</span>
           </h1>
-          <p class="text-lg md:text-xl text-gray-300 max-w-xl">
-            Himpunan Mahasiswa Teknik Informatika Universitas Bengkulu – wadah kreativitas, inovasi, dan kebersamaan.
-          </p>
+
+          <!-- Subtitle -->
+          <div class="space-y-4">
+            <p class="text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
+              Himpunan Mahasiswa Teknik Informatika Universitas Bengkulu
+            </p>
+            <p class="text-lg md:text-xl text-blue-200 max-w-xl opacity-90">
+              Wadah kreativitas, inovasi, dan kebersamaan untuk masa depan teknologi yang lebih cerah
+            </p>
+          </div>
+
+
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-8 pt-8" data-aos="fade-up" data-aos-delay="700">
+            <div class="text-center">
+              <div class="text-3xl md:text-4xl font-bold gradient-text">500+</div>
+              <div class="text-gray-300 text-sm mt-1">Anggota Aktif</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl md:text-4xl font-bold gradient-text">50+</div>
+              <div class="text-gray-300 text-sm mt-1">Event Tahunan</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl md:text-4xl font-bold gradient-text">15+</div>
+              <div class="text-gray-300 text-sm mt-1">Tahun Berdiri</div>
+            </div>
+          </div>
         </div>
 
-        <!-- Right: Image -->
-        <div class="flex justify-center md:justify-end" data-aos="fade-left" data-aos-delay="300">
-          <img src="./img/himatif.png" alt="Hero" class="w-3/4 md:w-full max-w-md rounded-xl shadow-lg" />
+        <!-- Right: Enhanced Image Section -->
+        <div class="flex justify-center lg:justify-end" data-aos="fade-left" data-aos-delay="300"
+          data-aos-duration="1000">
+          <div class="relative">
+            <!-- Background Glow Effect -->
+            <div
+              class="absolute -inset-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 rounded-3xl blur-3xl opacity-30 pulse-glow">
+            </div>
+
+            <!-- Main Image Container -->
+            <div class="relative glass-effect p-6 rounded-3xl floating-animation">
+              <img src="./img/himatif.png" alt="HIMATIF UNIB Logo"
+                class="w-full max-w-lg h-auto rounded-2xl shadow-2xl transform transition-transform duration-300 hover:scale-105" />
+
+              <!-- Decorative Elements -->
+              <div
+                class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full opacity-20 blur-xl">
+              </div>
+              <div
+                class="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-purple-400 to-blue-600 rounded-full opacity-15 blur-2xl">
+              </div>
+            </div>
+
+            <!-- Floating Tech Icons -->
+            <div class="absolute top-10 -left-8 glass-effect p-3 rounded-xl floating-animation"
+              style="animation-delay: -2s;">
+              <span class="text-2xl">💻</span>
+            </div>
+            <div class="absolute bottom-20 -right-8 glass-effect p-3 rounded-xl floating-animation"
+              style="animation-delay: -4s;">
+              <span class="text-2xl">🚀</span>
+            </div>
+            <div class="absolute top-1/3 -right-12 glass-effect p-3 rounded-xl floating-animation"
+              style="animation-delay: -1s;">
+              <span class="text-2xl">⚡</span>
+            </div>
+          </div>
         </div>
 
       </div>
+
+      <!-- Bottom Gradient Fade -->
+      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 to-transparent"></div>
     </section>
 
     <section id="about" class="relative py-28 bg-gradient-to-b from-gray-900 to-gray-950 overflow-hidden">
@@ -605,100 +851,93 @@
   </div>
 </template>
 
-<script>
-import "swiper/swiper-bundle.css";
-import "aos/dist/aos.css";
-
-export default {
-  name: "Testimonials",
-  mounted() {
-    // Inisialisasi AOS
-    import("aos").then((AOS) => {
-      AOS.init({
-        duration: 1000,
-        once: true,
-        easing: "ease-out-quart",
-      });
-    });
-
-    // Inisialisasi Swiper
-    import("swiper/bundle").then(({ default: Swiper }) => {
-      new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: {
-          delay: 3500,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        },
-      });
-    });
-
-    // ✅ Fungsi FAQ Accordion
-    const faqHeaders = document.querySelectorAll(".faq-header");
-    faqHeaders.forEach((header) => {
-      header.addEventListener("click", function () {
-        const faqItem = this.parentElement;
-        const content = this.nextElementSibling;
-        const chevron = this.querySelector(".faq-chevron");
-
-        // Tutup semua FAQ items lainnya
-        document.querySelectorAll(".faq-item").forEach((item) => {
-          if (item !== faqItem) {
-            item.classList.remove("active");
-            item.querySelector(".faq-content").classList.remove("max-h-96", "opacity-100");
-            item.querySelector(".faq-content").classList.add("max-h-0", "opacity-0");
-            item.querySelector(".faq-chevron").classList.remove("rotate-180");
-          }
-        });
-
-        // Toggle FAQ item yang diklik
-        const isActive = faqItem.classList.contains("active");
-
-        if (isActive) {
-          faqItem.classList.remove("active");
-          content.classList.remove("max-h-96", "opacity-100");
-          content.classList.add("max-h-0", "opacity-0");
-          chevron.classList.remove("rotate-180");
-        } else {
-          faqItem.classList.add("active");
-          content.classList.remove("max-h-0", "opacity-0");
-          content.classList.add("max-h-96", "opacity-100");
-          chevron.classList.add("rotate-180");
-        }
-      });
-    });
-
-    // ✅ Validasi Newsletter
-    const newsletterForm = document.querySelector(".newsletter-btn");
-    if (newsletterForm) {
-      newsletterForm.addEventListener("click", function (e) {
-        e.preventDefault();
-        const emailInput = document.querySelector('input[type="email"]');
-        if (emailInput.value === "" || !emailInput.value.includes("@")) {
-          emailInput.focus();
-          emailInput.classList.add("ring-2", "ring-red-500");
-        } else {
-          emailInput.classList.remove("ring-2", "ring-red-500");
-          alert("Terima kasih telah berlangganan newsletter kami!");
-          emailInput.value = "";
-        }
-      });
-    }
-  },
-};
-</script>
-
 <style>
-/* CSS yang Anda berikan */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 0.8rem 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #60a5fa;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #60a5fa;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #60a5fa;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 .testimonial-card {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   backdrop-filter: blur(10px);
@@ -1143,5 +1382,102 @@ html {
 .footer-link:hover {
   color: #3b82f6;
   transform: translateX(5px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(96, 165, 250, 0.8);
+  }
+}
+
+.bg-animated {
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #0c4a6e, #1e3a8a);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-shadow {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(96, 165, 250, 0.6);
+  animation: particle-float 8s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 </style>
