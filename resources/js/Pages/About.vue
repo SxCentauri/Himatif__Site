@@ -8,7 +8,6 @@ import PureCounter from '@srexi/purecounterjs'
 onMounted(async () => {
   await nextTick()
 
-  // ✅ Inisialisasi AOS
   AOS.init({
     duration: 1000,
     easing: 'ease-out-cubic',
