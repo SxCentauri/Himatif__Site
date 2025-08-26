@@ -38,6 +38,15 @@ onMounted(() => {
     }
   })
 
+  // ---- Active NavLink ----
+  const links = document.querySelectorAll('.nav-link')
+  const currentPath = window.location.pathname
+  links.forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active')
+    }
+  })
+
   // ---- AOS ----
   import("aos").then((AOS) => {
     AOS.init({
@@ -138,7 +147,7 @@ onMounted(() => {
       setTimeout(() => { this.style.transform = ""; }, 150);
     });
   });
-});
+})
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
@@ -159,22 +168,23 @@ onUnmounted(() => {
         <!-- Menu -->
         <ul class="nav-links hidden md:flex space-x-8 text-gray-200">
           <li>
-            <Link href="/" class="nav-link hover:text-blue-400 transition">Home</Link>
+            <Link href="/" class="nav-link" :class="{ 'active': route().current('home') }">Home</Link>
           </li>
           <li>
-            <Link href="/about" class="nav-link hover:text-blue-400 transition">About Us</Link>
+            <Link href="/about" class="nav-link" :class="{ 'active': route().current('about') }">About Us</Link>
           </li>
           <li>
-            <Link href="/profile" class="nav-link hover:text-blue-400 transition">Profile</Link>
+            <Link href="/profile" class="nav-link" :class="{ 'active': route().current('profile') }">Profile</Link>
           </li>
           <li>
-            <Link href="/proker" class="nav-link hover:text-blue-400 transition">Proker</Link>
+            <Link href="/proker" class="nav-link" :class="{ 'active': route().current('proker') }">Proker</Link>
           </li>
           <li>
-            <Link href="/academic" class="nav-link hover:text-blue-400 transition">Academic</Link>
+            <Link href="/academic" class="nav-link" :class="{ 'active': route().current('academic') }">Academic</Link>
           </li>
           <li>
-            <Link href="/aspiration" class="nav-link hover:text-blue-400 transition">Aspiration</Link>
+            <Link href="/aspiration" class="nav-link" :class="{ 'active': route().current('aspiration') }">Aspiration
+            </Link>
           </li>
         </ul>
 
@@ -927,6 +937,22 @@ onUnmounted(() => {
 
 .nav-link:hover::after {
   width: 100%;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  /* full garis bawah */
+  height: 2px;
+  background: #60a5fa;
+}
+
+.nav-link.active {
+  color: #60a5fa;
+  /* opsional biar teks ikut biru */
 }
 
 .mobile-menu-btn {
