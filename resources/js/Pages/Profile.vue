@@ -2,28 +2,101 @@
 import { Link } from '@inertiajs/vue3'
 import { onMounted, nextTick, ref, onUnmounted } from 'vue'
 
-// Import dinamis untuk menghindari SSR issues
-let AOS = null
-let PureCounter = null
-
+// === State Umum ===
 const activeTab = ref('vision-mission')
 const isLoaded = ref(false)
+const activeDepartment = ref(null)
 
 const setActiveTab = (tab) => {
   activeTab.value = tab
 }
 
+const setActiveDepartment = (dept) => {
+  activeDepartment.value = dept
+}
+
+// === Data Departemen + Anggota ===
 const departments = [
-  { name: 'Inti', icon: 'fas fa-star', description: 'Departemen HMIF' },
-  { name: 'Akademik', icon: 'fas fa-graduation-cap', description: 'Departemen HMIF' },
-  { name: 'PSDM', icon: 'fas fa-users', description: 'Departemen HMIF' },
-  { name: 'ADM', icon: 'fas fa-file-alt', description: 'Departemen HMIF' },
-  { name: 'Kominfo', icon: 'fas fa-bullhorn', description: 'Departemen HMIF' },
-  { name: 'PMB', icon: 'fas fa-user-plus', description: 'Departemen HMIF' },
-  { name: 'KWU', icon: 'fas fa-coins', description: 'Departemen HMIF' },
-  { name: 'Kastrad', icon: 'fas fa-balance-scale', description: 'Departemen HMIF' },
+  {
+    name: 'Inti',
+    icon: 'fas fa-star',
+    description: 'Departemen inti yang mengelola koordinasi organisasi',
+    members: [
+      { name: 'Ketua Umum', position: 'Ketua', batch: '2023' },
+      { name: 'Sekretaris', position: 'Sekretaris', batch: '2023' },
+      { name: 'Bendahara', position: 'Bendahara', batch: '2023' }
+    ]
+  },
+  {
+    name: 'Akademik',
+    icon: 'fas fa-graduation-cap',
+    description: 'Mengembangkan program akademik dan peningkatan keilmuan',
+    members: [
+      { name: 'Koordinator Akademik', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff Akademik 1', position: 'Staff', batch: '2023' },
+      { name: 'Staff Akademik 2', position: 'Staff', batch: '2023' }
+    ]
+  },
+  {
+    name: 'PSDM',
+    icon: 'fas fa-users',
+    description: 'Mengelola pengembangan sumber daya manusia',
+    members: [
+      { name: 'Koordinator PSDM', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff PSDM 1', position: 'Staff', batch: '2023' },
+      { name: 'Staff PSDM 2', position: 'Staff', batch: '2023' }
+    ]
+  },
+  {
+    name: 'ADM',
+    icon: 'fas fa-file-alt',
+    description: 'Administrasi dan dokumentasi organisasi',
+    members: [
+      { name: 'Koordinator ADM', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff ADM 1', position: 'Staff', batch: '2023' }
+    ]
+  },
+  {
+    name: 'Kominfo',
+    icon: 'fas fa-bullhorn',
+    description: 'Komunikasi dan informasi internal/eksternal',
+    members: [
+      { name: 'Koordinator Kominfo', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff Kominfo 1', position: 'Staff', batch: '2023' },
+      { name: 'Staff Kominfo 2', position: 'Staff', batch: '2023' }
+    ]
+  },
+  {
+    name: 'PMB',
+    icon: 'fas fa-user-plus',
+    description: 'Pengelolaan mahasiswa baru',
+    members: [
+      { name: 'Koordinator PMB', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff PMB 1', position: 'Staff', batch: '2023' }
+    ]
+  },
+  {
+    name: 'KWU',
+    icon: 'fas fa-coins',
+    description: 'Kewirausahaan dan pengembangan usaha',
+    members: [
+      { name: 'Koordinator KWU', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff KWU 1', position: 'Staff', batch: '2023' },
+      { name: 'Staff KWU 2', position: 'Staff', batch: '2023' }
+    ]
+  },
+  {
+    name: 'Kastrad',
+    icon: 'fas fa-balance-scale',
+    description: 'Kajian dan strategi organisasi',
+    members: [
+      { name: 'Koordinator Kastrad', position: 'Koordinator', batch: '2023' },
+      { name: 'Staff Kastrad 1', position: 'Staff', batch: '2023' }
+    ]
+  }
 ]
 
+// === Data Anggota Inti / Showcase (opsional) ===
 const members = [
   { name: 'Putri Alisya Zhafirah', position: 'Bendahara Umum II', batch: 'BIL A 2023', image: './img/member1.jpg' },
   { name: 'Muhammad Fattahul Aziz', position: 'Ketua Himpunan', batch: 'BIL 2023', image: './img/member2.jpg' },
@@ -31,21 +104,22 @@ const members = [
   { name: 'Azka Hukma Tsabita', position: 'Sekretaris Umum I', batch: 'BIL A 2023', image: './img/member4.jpg' },
 ]
 
+// === Import dinamis AOS + PureCounter ===
+let AOS = null
+let PureCounter = null
+
 // Variables for cleanup
 let scrollHandler = null
 let observer = null
 
 const initializeLibraries = async () => {
   try {
-    // Import AOS
     const aosModule = await import('aos')
     AOS = aosModule.default
     await import('aos/dist/aos.css')
-    
-    // Import PureCounter
+
     const pureCounterModule = await import('@srexi/purecounterjs')
     PureCounter = pureCounterModule.default
-    
     return true
   } catch (error) {
     console.warn('Failed to load libraries:', error)
@@ -55,7 +129,6 @@ const initializeLibraries = async () => {
 
 const setupAnimations = () => {
   if (!AOS) return
-  
   AOS.init({
     duration: 1000,
     easing: 'ease-out-cubic',
@@ -66,9 +139,7 @@ const setupAnimations = () => {
 
 const setupPureCounter = () => {
   if (!PureCounter) return
-  
   try {
-    // Tunggu sebentar sebelum inisialisasi PureCounter
     setTimeout(() => {
       new PureCounter({
         duration: 2,
@@ -82,12 +153,10 @@ const setupPureCounter = () => {
 }
 
 const setupScrollEffects = () => {
-  // Smooth scroll
   if (typeof document !== 'undefined') {
     document.documentElement.style.scrollBehavior = 'smooth'
   }
 
-  // Navbar scroll effect
   scrollHandler = () => {
     const navbar = document.querySelector('.navbar')
     if (navbar) {
@@ -98,7 +167,7 @@ const setupScrollEffects = () => {
       }
     }
   }
-  
+
   if (typeof window !== 'undefined') {
     window.addEventListener('scroll', scrollHandler)
   }
@@ -106,7 +175,7 @@ const setupScrollEffects = () => {
 
 const setupIntersectionObserver = () => {
   if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return
-  
+
   const sections = document.querySelectorAll('section')
   const observerOptions = {
     threshold: 0.1,
@@ -130,7 +199,6 @@ const setupIntersectionObserver = () => {
 
 const setupActiveNavLinks = () => {
   if (typeof window === 'undefined') return
-  
   const links = document.querySelectorAll('.nav-link')
   const currentPath = window.location.pathname
   links.forEach(link => {
@@ -141,31 +209,25 @@ const setupActiveNavLinks = () => {
 }
 
 onMounted(async () => {
-  // Pastikan kita di browser
   if (typeof window === 'undefined') return
-  
   await nextTick()
-  
-  // Load libraries secara asinkron
+
   const librariesLoaded = await initializeLibraries()
-  
   if (librariesLoaded) {
     setupAnimations()
     setupPureCounter()
   }
-  
+
   setupScrollEffects()
   setupIntersectionObserver()
   setupActiveNavLinks()
-  
-  // Set loading state
+
   setTimeout(() => {
     isLoaded.value = true
   }, 100)
 })
 
 onUnmounted(() => {
-  // Cleanup
   if (scrollHandler && typeof window !== 'undefined') {
     window.removeEventListener('scroll', scrollHandler)
   }
@@ -175,14 +237,15 @@ onUnmounted(() => {
 })
 </script>
 
+
 <template>
   <div class="min-h-screen flex flex-col">
     <header class="navbar fixed w-full z-50 bg-gray-900/80 backdrop-blur-md shadow-md">
       <nav class="nav-container container mx-auto flex justify-between items-center py-4 px-6">
         <!-- Logo + Text -->
         <Link href="/" class="logo flex items-center space-x-3">
-          <img src="./img/himatif.png" alt="HIMATIF Logo" class="logo-img h-20 w-20 object-contain" />
-          <span class="logo-text text-2xl font-bold text-blue-400">HIMATIF UNIB</span>
+        <img src="./img/himatif.png" alt="HIMATIF Logo" class="logo-img h-20 w-20 object-contain" />
+        <span class="logo-text text-2xl font-bold text-blue-400">HIMATIF UNIB</span>
         </Link>
 
         <!-- Menu -->
@@ -203,7 +266,8 @@ onUnmounted(() => {
             <Link href="/academic" class="nav-link" :class="{ 'active': route().current('academic') }">Academic</Link>
           </li>
           <li>
-            <Link href="/aspiration" class="nav-link" :class="{ 'active': route().current('aspiration') }">Aspiration</Link>
+            <Link href="/aspiration" class="nav-link" :class="{ 'active': route().current('aspiration') }">Aspiration
+            </Link>
           </li>
         </ul>
 
@@ -215,78 +279,66 @@ onUnmounted(() => {
     </header>
 
     <!-- Main Content -->
-    <main class="bg-gradient-to-b from-[#0d0d1a] to-[#1a1a2e] text-gray-200 min-h-screen pt-24">
-    <!-- Hero Section -->
-    <section class="text-center py-16">
-      <p class="text-pink-400 font-semibold mb-4">Our Team</p>
-      <h1 class="text-4xl md:text-5xl font-bold text-white">
-        Our Strength Lies In Our Team
-      </h1>
-      <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
-        Kami persembahkan jajaran kabinet HMIF yang penuh semangat!  
-        Bersama, kita kuatkan formasi dan wujudkan inovasi!
-      </p>
-      <div class="mt-10">
-        <a href="#departments" class="inline-flex justify-center">
-          <div class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-pink-400 hover:border-pink-400 transition">
-            <i class="fas fa-chevron-down"></i>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Departments Section -->
-    <section id="departments" class="py-20">
-      <div class="text-center mb-12">
-        <p class="text-pink-400 font-semibold mb-2">Explore</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-white">Our Cabinet</h2>
-        <p class="mt-3 text-gray-400 max-w-xl mx-auto">
-          Temukan berbagai departemen dan divisi yang ada di HMIF UNSRI,  
-          masing-masing dengan fokus dan program unggulan yang berbeda.
+    <main class="bg-gradient-to-b from-gray-900 via-[#0d0d1a] to-gray-950 text-gray-200 min-h-screen pt-24">
+      <!-- Hero Section -->
+      <section class="text-center py-16 relative overflow-hidden">
+        <p class="text-blue-400 font-semibold mb-4">Our Team</p>
+        <h1
+          class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          Our Strength Lies In Our Team
+        </h1>
+        <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
+          Kami persembahkan jajaran kabinet HMIF yang penuh semangat!
+          Bersama, kita kuatkan formasi dan wujudkan inovasi!
         </p>
-      </div>
-
-      <!-- Grid Departments -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
-        <div
-          v-for="(dept, i) in departments"
-          :key="i"
-          class="bg-[#13132b] hover:bg-[#1e1e3a] rounded-2xl p-6 shadow-lg text-center transition"
-        >
-          <div class="text-4xl mb-4">
-            <i :class="dept.icon"></i>
-          </div>
-          <h3 class="text-lg font-semibold text-white">{{ dept.name }}</h3>
-          <p class="text-sm text-gray-400">{{ dept.description }}</p>
+        <div class="mt-10">
+          <a href="#departments" class="inline-flex justify-center">
+            <div
+              class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-400 transition">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Members Section -->
-    <section id="members" class="py-20">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white">Badan Pengurus Harian</h2>
-      </div>
+      <!-- Departments Section -->
+      <section id="departments" class="py-20">
+        <div class="text-center mb-12">
+          <p class="text-purple-400 font-semibold mb-2">Explore</p>
+          <h2
+            class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Our Cabinet
+          </h2>
+        </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
-        <div
-          v-for="(member, i) in members"
-          :key="i"
-          class="bg-[#13132b] rounded-2xl shadow-lg text-center p-6 hover:-translate-y-2 transition"
-        >
-          <img :src="member.image" alt="member photo"
-               class="w-24 h-24 mx-auto rounded-full border-4 border-pink-400 object-cover" />
-          <h4 class="mt-4 text-white font-semibold">{{ member.name }}</h4>
-          <p class="text-pink-400 text-sm">{{ member.position }}</p>
-          <p class="text-gray-400 text-xs mt-1">{{ member.batch }}</p>
-          <div class="flex justify-center gap-4 mt-4 text-gray-400">
-            <a href="#" class="hover:text-pink-400"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-pink-400"><i class="fas fa-envelope"></i></a>
+        <!-- Grid Departments -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
+          <div v-for="(dept, i) in departments" :key="i" @click="setActiveDepartment(dept)"
+            class="cursor-pointer bg-gray-800/40 hover:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-700 hover:border-blue-500/50 text-center transition-all hover:shadow-blue-500/20">
+            <div class="text-4xl mb-4 text-blue-400">
+              <i :class="dept.icon"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-white">{{ dept.name }}</h3>
+            <p class="text-sm text-gray-400">{{ dept.description }}</p>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+
+        <!-- Members of selected department -->
+        <div v-if="activeDepartment" class="mt-16 max-w-4xl mx-auto">
+          <h3 class="text-2xl font-bold text-center text-blue-400 mb-8">
+            Anggota {{ activeDepartment.name }}
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div v-for="(member, idx) in activeDepartment.members" :key="idx"
+              class="bg-gray-800/40 rounded-xl p-6 shadow-lg border border-gray-700 hover:border-purple-500/50 transition-all">
+              <h4 class="text-white font-semibold">{{ member.name }}</h4>
+              <p class="text-blue-400 text-sm">{{ member.position }}</p>
+              <p class="text-gray-400 text-xs mt-1">{{ member.batch }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-gradient-to-b from-gray-900 to-gray-950 pt-16 pb-8 px-4">
@@ -521,14 +573,21 @@ body {
   right: 0;
   bottom: 0;
   background-image: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
   animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .floating-element {
@@ -536,8 +595,15 @@ body {
 }
 
 @keyframes floatUpDown {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-30px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-30px);
+  }
 }
 
 /* Button Styles */
@@ -584,13 +650,18 @@ body {
   transform: translateY(-3px);
 }
 
-/* Footer Links */
 .footer-link {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .footer-link:hover {
+  color: #3b82f6;
   transform: translateX(5px);
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(100, 116, 139, 0.3);
+  margin: 2rem 0;
 }
 
 /* Custom Scrollbar */
@@ -616,19 +687,19 @@ body {
   .nav-links {
     display: none;
   }
-  
+
   .mobile-menu-btn {
     display: block;
   }
-  
+
   .logo-text {
     font-size: 1.2rem;
   }
-  
+
   .hero-section h1 {
     font-size: 2.5rem;
   }
-  
+
   .hero-section p {
     font-size: 1.1rem;
   }
@@ -644,6 +715,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

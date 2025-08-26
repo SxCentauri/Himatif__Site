@@ -976,15 +976,18 @@ body {
   font-size: 1.1rem;
 }
 
-/* Footer */
-.footer {
-  background: #111827;
-  padding: 3rem 1.5rem;
-  text-align: center;
+.footer-link {
+  transition: all 0.2s ease;
 }
 
-.footer-text {
-  color: #9ca3af;
+.footer-link:hover {
+  color: #3b82f6;
+  transform: translateX(5px);
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(100, 116, 139, 0.3);
+  margin: 2rem 0;
 }
 
 /* Animations */

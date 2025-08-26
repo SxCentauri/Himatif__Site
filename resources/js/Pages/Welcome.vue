@@ -1,183 +1,44 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import { onMounted, nextTick, ref, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
-// Import dinamis untuk menghindari SSR issues
-let AOS = null
-let PureCounter = null
+// ✅ State untuk mobile menu
+const isMobileMenuOpen = ref(false)
 
-// 🔹 State
-const activeTab = ref('vision-mission')
-const isLoaded = ref(false)
-
-const setActiveTab = (tab) => {
-  activeTab.value = tab
+// ✅ Toggle mobile menu
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-// 🔹 Data dari organisasi
-const organizationStructure = ref([
-  {
-    position: 'Ketua Umum',
-    name: 'Ahmad Rizky Pratama',
-    image: './img/ketum.jpg',
-    description: 'Memimpin dan mengkoordinasi seluruh kegiatan HIMATIF'
-  },
-  {
-    position: 'Wakil Ketua',
-    name: 'Sari Dewi Lestari',
-    image: './img/waketum.jpg',
-    description: 'Mendampingi Ketua dalam menjalankan organisasi'
-  },
-  {
-    position: 'Sekretaris',
-    name: 'Muhammad Fajar',
-    image: './img/sekretaris.jpg',
-    description: 'Mengatur administrasi dan dokumentasi organisasi'
-  },
-  {
-    position: 'Bendahara',
-    name: 'Rina Puspitasari',
-    image: './img/bendahara.jpg',
-    description: 'Mengelola keuangan dan anggaran organisasi'
-  }
-])
-
-const divisions = ref([
-  {
-    name: 'Divisi Akademik',
-    head: 'Dr. Budi Santoso, M.Kom',
-    members: 8,
-    description: 'Menangani kegiatan akademik, seminar, workshop, dan pelatihan teknis',
-    icon: 'fas fa-graduation-cap',
-    color: 'blue'
-  },
-  {
-    name: 'Divisi Humas & Kemitraan',
-    head: 'Lisa Handayani, S.Kom',
-    members: 6,
-    description: 'Membangun hubungan dengan eksternal dan menjalin kerjasama',
-    icon: 'fas fa-handshake',
-    color: 'green'
-  },
-  {
-    name: 'Divisi Minat & Bakat',
-    head: 'Eko Prasetyo, M.T',
-    members: 10,
-    description: 'Mengembangkan minat dan bakat mahasiswa di bidang non-akademik',
-    icon: 'fas fa-trophy',
-    color: 'yellow'
-  },
-  {
-    name: 'Divisi Media & Informasi',
-    head: 'Maya Sari, S.Kom',
-    members: 7,
-    description: 'Mengelola media sosial, website, dan sistem informasi HIMATIF',
-    icon: 'fas fa-laptop-code',
-    color: 'purple'
-  }
-])
-
-// 🔹 Variables for cleanup
-let scrollHandler = null
-let observer = null
-
-// ======================
-// Utility setup functions
-// ======================
-const initializeLibraries = async () => {
-  try {
-    // Import AOS
-    const aosModule = await import('aos')
-    AOS = aosModule.default
-    await import('aos/dist/aos.css')
-    
-    // Import PureCounter
-    const pureCounterModule = await import('@srexi/purecounterjs')
-    PureCounter = pureCounterModule.default
-    
-    return true
-  } catch (error) {
-    console.warn('Failed to load libraries:', error)
-    return false
-  }
-}
-
-const setupAnimations = () => {
-  if (!AOS) return
-  
-  AOS.init({
-    duration: 1000,
-    easing: 'ease-out-cubic',
-    once: true,
-    offset: 100,
-  })
-}
-
-const setupPureCounter = () => {
-  if (!PureCounter) return
-  
-  try {
-    if (window.purecounter) {
-      window.purecounter = null
+// ✅ Handle scroll effect (ubah navbar)
+const handleScroll = () => {
+  const navbar = document.querySelector('.navbar')
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled')
+    } else {
+      navbar.classList.remove('scrolled')
     }
-    new PureCounter({
-      duration: 2,
-      delay: 10,
-      once: true
-    })
-  } catch (error) {
-    console.warn('PureCounter initialization failed:', error)
   }
 }
 
-const setupScrollEffects = () => {
-  if (typeof document !== 'undefined') {
-    document.documentElement.style.scrollBehavior = 'smooth'
-  }
+// ✅ Close mobile menu ketika klik link
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+}
 
-  scrollHandler = () => {
+onMounted(() => {
+  // ---- NAVBAR ----
+  window.addEventListener('scroll', handleScroll)
+  document.documentElement.style.scrollBehavior = 'smooth'
+  document.addEventListener('click', (e) => {
     const navbar = document.querySelector('.navbar')
-    if (navbar) {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled')
-      } else {
-        navbar.classList.remove('scrolled')
-      }
+    if (navbar && !navbar.contains(e.target)) {
+      isMobileMenuOpen.value = false
     }
-  }
-  
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', scrollHandler)
-  }
-}
-
-const setupIntersectionObserver = () => {
-  if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return
-  
-  const sections = document.querySelectorAll('section')
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  }
-
-  observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible', 'opacity-100')
-        entry.target.classList.remove('opacity-0')
-      }
-    })
-  }, observerOptions)
-
-  sections.forEach((section) => {
-    section.classList.add('transition-opacity', 'duration-1000', 'opacity-0')
-    observer.observe(section)
   })
-}
 
-const setupActiveNavLinks = () => {
-  if (typeof window === 'undefined') return
-  
+  // ---- Active NavLink ----
   const links = document.querySelectorAll('.nav-link')
   const currentPath = window.location.pathname
   links.forEach(link => {
@@ -185,39 +46,111 @@ const setupActiveNavLinks = () => {
       link.classList.add('active')
     }
   })
-}
 
-// ======================
-// Lifecycle
-// ======================
-onMounted(async () => {
-  if (typeof window === 'undefined') return
-  
-  await nextTick()
-  
-  const librariesLoaded = await initializeLibraries()
-  
-  if (librariesLoaded) {
-    setupAnimations()
-    setupPureCounter()
+  // ---- AOS ----
+  import("aos").then((AOS) => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-quart",
+      offset: 100,
+    });
+  });
+
+  // ---- Swiper ----
+  import("swiper/bundle").then(({ default: Swiper }) => {
+    new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  });
+
+  // ---- FAQ Accordion ----
+  const faqHeaders = document.querySelectorAll(".faq-header");
+  faqHeaders.forEach((header) => {
+    header.addEventListener("click", function () {
+      const faqItem = this.parentElement;
+      const content = this.nextElementSibling;
+      const chevron = this.querySelector(".faq-chevron");
+
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        if (item !== faqItem) {
+          item.classList.remove("active");
+          item.querySelector(".faq-content").classList.remove("max-h-96", "opacity-100");
+          item.querySelector(".faq-content").classList.add("max-h-0", "opacity-0");
+          item.querySelector(".faq-chevron").classList.remove("rotate-180");
+        }
+      });
+
+      const isActive = faqItem.classList.contains("active");
+      if (isActive) {
+        faqItem.classList.remove("active");
+        content.classList.remove("max-h-96", "opacity-100");
+        content.classList.add("max-h-0", "opacity-0");
+        chevron.classList.remove("rotate-180");
+      } else {
+        faqItem.classList.add("active");
+        content.classList.remove("max-h-0", "opacity-0");
+        content.classList.add("max-h-96", "opacity-100");
+        chevron.classList.add("rotate-180");
+      }
+    });
+  });
+
+  // ---- Newsletter Validation ----
+  const newsletterForm = document.querySelector(".newsletter-btn");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("click", function (e) {
+      e.preventDefault();
+      const emailInput = document.querySelector('input[type="email"]');
+      if (emailInput.value === "" || !emailInput.value.includes("@")) {
+        emailInput.focus();
+        emailInput.classList.add("ring-2", "ring-red-500");
+      } else {
+        emailInput.classList.remove("ring-2", "ring-red-500");
+        alert("Terima kasih telah berlangganan newsletter kami!");
+        emailInput.value = "";
+      }
+    });
   }
-  
-  setupScrollEffects()
-  setupIntersectionObserver()
-  setupActiveNavLinks()
-  
-  setTimeout(() => {
-    isLoaded.value = true
-  }, 100)
+
+  // ---- Background Particle Animation ----
+  function createParticle() {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.width = particle.style.height = Math.random() * 4 + 2 + "px";
+    particle.style.animationDelay = Math.random() * 8 + "s";
+    const bg = document.querySelector(".bg-animated");
+    if (bg) bg.appendChild(particle);
+    setTimeout(() => { particle.remove(); }, 8000);
+  }
+  setInterval(createParticle, 2000);
+
+  // ---- Button Animation ----
+  document.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", function () {
+      this.style.transform = "scale(0.95)";
+      setTimeout(() => { this.style.transform = ""; }, 150);
+    });
+  });
 })
 
 onUnmounted(() => {
-  if (scrollHandler && typeof window !== 'undefined') {
-    window.removeEventListener('scroll', scrollHandler)
-  }
-  if (observer) {
-    observer.disconnect()
-  }
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -241,7 +174,7 @@ onUnmounted(() => {
             <Link href="/about" class="nav-link" :class="{ 'active': route().current('about') }">About Us</Link>
           </li>
           <li>
-            <Link href="/profiles" class="nav-link" :class="{ 'active': route().current('profiles') }">Profile</Link>
+            <Link href="/profiles" class="nav-link" :class="{ 'active': route().current('profile') }">Profile</Link>
           </li>
           <li>
             <Link href="/proker" class="nav-link" :class="{ 'active': route().current('proker') }">Proker</Link>
