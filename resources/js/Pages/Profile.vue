@@ -1,32 +1,94 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-import { onMounted, nextTick } from 'vue'
-import PureCounter from '@srexi/purecounterjs'
+import { onMounted, nextTick, ref, onUnmounted } from 'vue'
 
-onMounted(async () => {
-  await nextTick()
+// Import dinamis untuk menghindari SSR issues
+let AOS = null
+let PureCounter = null
 
+const activeTab = ref('vision-mission')
+const isLoaded = ref(false)
+
+const setActiveTab = (tab) => {
+  activeTab.value = tab
+}
+
+const departments = [
+  { name: 'Inti', icon: 'fas fa-star', description: 'Departemen HMIF' },
+  { name: 'Akademik', icon: 'fas fa-graduation-cap', description: 'Departemen HMIF' },
+  { name: 'PSDM', icon: 'fas fa-users', description: 'Departemen HMIF' },
+  { name: 'ADM', icon: 'fas fa-file-alt', description: 'Departemen HMIF' },
+  { name: 'Kominfo', icon: 'fas fa-bullhorn', description: 'Departemen HMIF' },
+  { name: 'PMB', icon: 'fas fa-user-plus', description: 'Departemen HMIF' },
+  { name: 'KWU', icon: 'fas fa-coins', description: 'Departemen HMIF' },
+  { name: 'Kastrad', icon: 'fas fa-balance-scale', description: 'Departemen HMIF' },
+]
+
+const members = [
+  { name: 'Putri Alisya Zhafirah', position: 'Bendahara Umum II', batch: 'BIL A 2023', image: './img/member1.jpg' },
+  { name: 'Muhammad Fattahul Aziz', position: 'Ketua Himpunan', batch: 'BIL 2023', image: './img/member2.jpg' },
+  { name: 'Adhia Rihal Sulaiman', position: 'Wakil Ketua Himpunan', batch: 'REG A 2023', image: './img/member3.jpg' },
+  { name: 'Azka Hukma Tsabita', position: 'Sekretaris Umum I', batch: 'BIL A 2023', image: './img/member4.jpg' },
+]
+
+// Variables for cleanup
+let scrollHandler = null
+let observer = null
+
+const initializeLibraries = async () => {
+  try {
+    // Import AOS
+    const aosModule = await import('aos')
+    AOS = aosModule.default
+    await import('aos/dist/aos.css')
+    
+    // Import PureCounter
+    const pureCounterModule = await import('@srexi/purecounterjs')
+    PureCounter = pureCounterModule.default
+    
+    return true
+  } catch (error) {
+    console.warn('Failed to load libraries:', error)
+    return false
+  }
+}
+
+const setupAnimations = () => {
+  if (!AOS) return
+  
   AOS.init({
     duration: 1000,
     easing: 'ease-out-cubic',
     once: true,
     offset: 100,
   })
+}
 
-  // ✅ Inisialisasi PureCounter
+const setupPureCounter = () => {
+  if (!PureCounter) return
+  
   try {
-    new PureCounter()
+    // Tunggu sebentar sebelum inisialisasi PureCounter
+    setTimeout(() => {
+      new PureCounter({
+        duration: 2,
+        delay: 10,
+        once: true
+      })
+    }, 500)
   } catch (error) {
-    console.log('PureCounter initialization failed:', error)
+    console.warn('PureCounter initialization failed:', error)
+  }
+}
+
+const setupScrollEffects = () => {
+  // Smooth scroll
+  if (typeof document !== 'undefined') {
+    document.documentElement.style.scrollBehavior = 'smooth'
   }
 
-  // ✅ Smooth scroll
-  document.documentElement.style.scrollBehavior = 'smooth'
-
-  // ✅ Navbar scroll effect
-  const handleScroll = () => {
+  // Navbar scroll effect
+  scrollHandler = () => {
     const navbar = document.querySelector('.navbar')
     if (navbar) {
       if (window.scrollY > 50) {
@@ -36,16 +98,22 @@ onMounted(async () => {
       }
     }
   }
-  window.addEventListener('scroll', handleScroll)
+  
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', scrollHandler)
+  }
+}
 
-  // ✅ Intersection Observer (animasi section saat muncul)
+const setupIntersectionObserver = () => {
+  if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return
+  
   const sections = document.querySelectorAll('section')
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px',
   }
 
-  const observer = new IntersectionObserver((entries) => {
+  observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible', 'opacity-100')
@@ -58,8 +126,11 @@ onMounted(async () => {
     section.classList.add('transition-opacity', 'duration-1000', 'opacity-0')
     observer.observe(section)
   })
+}
 
-  // ✅ Highlight active nav-link
+const setupActiveNavLinks = () => {
+  if (typeof window === 'undefined') return
+  
   const links = document.querySelectorAll('.nav-link')
   const currentPath = window.location.pathname
   links.forEach(link => {
@@ -67,23 +138,51 @@ onMounted(async () => {
       link.classList.add('active')
     }
   })
+}
 
-  // Cleanup ketika komponen unmounted
-  return () => {
-    window.removeEventListener('scroll', handleScroll)
+onMounted(async () => {
+  // Pastikan kita di browser
+  if (typeof window === 'undefined') return
+  
+  await nextTick()
+  
+  // Load libraries secara asinkron
+  const librariesLoaded = await initializeLibraries()
+  
+  if (librariesLoaded) {
+    setupAnimations()
+    setupPureCounter()
+  }
+  
+  setupScrollEffects()
+  setupIntersectionObserver()
+  setupActiveNavLinks()
+  
+  // Set loading state
+  setTimeout(() => {
+    isLoaded.value = true
+  }, 100)
+})
+
+onUnmounted(() => {
+  // Cleanup
+  if (scrollHandler && typeof window !== 'undefined') {
+    window.removeEventListener('scroll', scrollHandler)
+  }
+  if (observer) {
     observer.disconnect()
   }
 })
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col">
-        <header class="navbar fixed w-full z-50 bg-gray-900/80 backdrop-blur-md shadow-md">
+  <div class="min-h-screen flex flex-col">
+    <header class="navbar fixed w-full z-50 bg-gray-900/80 backdrop-blur-md shadow-md">
       <nav class="nav-container container mx-auto flex justify-between items-center py-4 px-6">
         <!-- Logo + Text -->
         <Link href="/" class="logo flex items-center space-x-3">
-        <img src="./img/himatif.png" alt="HIMATIF Logo" class="logo-img h-20 w-20 object-contain" />
-        <span class="logo-text text-2xl font-bold text-blue-400">HIMATIF UNIB</span>
+          <img src="./img/himatif.png" alt="HIMATIF Logo" class="logo-img h-20 w-20 object-contain" />
+          <span class="logo-text text-2xl font-bold text-blue-400">HIMATIF UNIB</span>
         </Link>
 
         <!-- Menu -->
@@ -104,8 +203,7 @@ onMounted(async () => {
             <Link href="/academic" class="nav-link" :class="{ 'active': route().current('academic') }">Academic</Link>
           </li>
           <li>
-            <Link href="/aspiration" class="nav-link" :class="{ 'active': route().current('aspiration') }">Aspiration
-            </Link>
+            <Link href="/aspiration" class="nav-link" :class="{ 'active': route().current('aspiration') }">Aspiration</Link>
           </li>
         </ul>
 
@@ -115,6 +213,80 @@ onMounted(async () => {
         </button>
       </nav>
     </header>
+
+    <!-- Main Content -->
+    <main class="bg-gradient-to-b from-[#0d0d1a] to-[#1a1a2e] text-gray-200 min-h-screen pt-24">
+    <!-- Hero Section -->
+    <section class="text-center py-16">
+      <p class="text-pink-400 font-semibold mb-4">Our Team</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white">
+        Our Strength Lies In Our Team
+      </h1>
+      <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
+        Kami persembahkan jajaran kabinet HMIF yang penuh semangat!  
+        Bersama, kita kuatkan formasi dan wujudkan inovasi!
+      </p>
+      <div class="mt-10">
+        <a href="#departments" class="inline-flex justify-center">
+          <div class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-pink-400 hover:border-pink-400 transition">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section id="departments" class="py-20">
+      <div class="text-center mb-12">
+        <p class="text-pink-400 font-semibold mb-2">Explore</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white">Our Cabinet</h2>
+        <p class="mt-3 text-gray-400 max-w-xl mx-auto">
+          Temukan berbagai departemen dan divisi yang ada di HMIF UNSRI,  
+          masing-masing dengan fokus dan program unggulan yang berbeda.
+        </p>
+      </div>
+
+      <!-- Grid Departments -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
+        <div
+          v-for="(dept, i) in departments"
+          :key="i"
+          class="bg-[#13132b] hover:bg-[#1e1e3a] rounded-2xl p-6 shadow-lg text-center transition"
+        >
+          <div class="text-4xl mb-4">
+            <i :class="dept.icon"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">{{ dept.name }}</h3>
+          <p class="text-sm text-gray-400">{{ dept.description }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="py-20">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white">Badan Pengurus Harian</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
+        <div
+          v-for="(member, i) in members"
+          :key="i"
+          class="bg-[#13132b] rounded-2xl shadow-lg text-center p-6 hover:-translate-y-2 transition"
+        >
+          <img :src="member.image" alt="member photo"
+               class="w-24 h-24 mx-auto rounded-full border-4 border-pink-400 object-cover" />
+          <h4 class="mt-4 text-white font-semibold">{{ member.name }}</h4>
+          <p class="text-pink-400 text-sm">{{ member.position }}</p>
+          <p class="text-gray-400 text-xs mt-1">{{ member.batch }}</p>
+          <div class="flex justify-center gap-4 mt-4 text-gray-400">
+            <a href="#" class="hover:text-pink-400"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-pink-400"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
     <!-- Footer -->
     <footer class="bg-gradient-to-b from-gray-900 to-gray-950 pt-16 pb-8 px-4">
@@ -210,7 +382,7 @@ onMounted(async () => {
         </div>
 
         <!-- Divider -->
-        <div class="footer-divider"></div>
+        <div class="footer-divider border-t border-gray-700"></div>
 
         <!-- Copyright -->
         <div class="flex flex-col md:flex-row justify-between items-center pt-6">
@@ -224,11 +396,11 @@ onMounted(async () => {
         </div>
       </div>
     </footer>
-    </div>
+  </div>
 </template>
 
 <style>
-    body {
+body {
   background: #0f172a;
   color: #f3f4f6;
   overflow-x: hidden;
@@ -318,14 +490,12 @@ onMounted(async () => {
   bottom: -5px;
   left: 0;
   width: 100%;
-  /* full garis bawah */
   height: 2px;
   background: #60a5fa;
 }
 
 .nav-link.active {
   color: #60a5fa;
-  /* opsional biar teks ikut biru */
 }
 
 .mobile-menu-btn {
@@ -335,5 +505,201 @@ onMounted(async () => {
   color: #e5e7eb;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+/* Hero Section Styles */
+.hero-section {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floating-element {
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Newsletter Styles */
+.newsletter-input {
+  background: #374151;
+  border: 1px solid #4b5563;
+  color: #f3f4f6;
+}
+
+.newsletter-btn {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  transition: all 0.3s ease;
+}
+
+.newsletter-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  transform: translateY(-2px);
+}
+
+/* Social Icons */
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+}
+
+/* Footer Links */
+.footer-link {
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  transform: translateX(5px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Tab Animation */
+.tab-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Hover Effects */
+.hover\\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Gradient Text */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Glass Effect */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+/* Custom Color Classes for Dynamic Styling */
+.bg-blue-500\/20 {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.bg-purple-500\/20 {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+.bg-green-500\/20 {
+  background-color: rgba(34, 197, 94, 0.2);
+}
+
+.bg-yellow-500\/20 {
+  background-color: rgba(234, 179, 8, 0.2);
+}
+
+.text-blue-400 {
+  color: #60a5fa;
+}
+
+.text-purple-400 {
+  color: #a78bfa;
+}
+
+.text-green-400 {
+  color: #4ade80;
+}
+
+.text-yellow-400 {
+  color: #facc15;
 }
 </style>
