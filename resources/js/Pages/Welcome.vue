@@ -174,7 +174,7 @@ onUnmounted(() => {
             <Link href="/about" class="nav-link" :class="{ 'active': route().current('about') }">About Us</Link>
           </li>
           <li>
-            <Link href="/profile" class="nav-link" :class="{ 'active': route().current('profile') }">Profile</Link>
+            <Link href="/profiles" class="nav-link" :class="{ 'active': route().current('profiles') }">Profile</Link>
           </li>
           <li>
             <Link href="/proker" class="nav-link" :class="{ 'active': route().current('proker') }">Proker</Link>

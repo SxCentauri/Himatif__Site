@@ -13,6 +13,10 @@ Route::get('/about', function () {
     return inertia('About'); // Halaman About
 });
 
+Route::get('/profiles', function () {
+    return inertia('Profile'); // Halaman Profile
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
